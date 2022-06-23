@@ -43,10 +43,14 @@ The tests are generated such that there is exactly one solution.
 
 public class TwoSumSortedArray {
     public int[] twoSum(int[] numbers, int target) {
-        for (int i = 0, j = i + 1; i < numbers.length; i++) {
-            if (i + 2 < numbers.length && numbers[i] == numbers[i + 2]) {
-                i += 2;
-                continue;
+        for (int i = 0, j = i+1; i < numbers.length; i++) {
+            if(numbers[i]==numbers[i+1]){
+                if (numbers[i] + numbers[i+1] == target) {
+                    return new int[]{i+1, i+2};
+                }
+                else{
+                    continue;
+                }
             }
             while (j < numbers.length) {
                 if (numbers[i] + numbers[j] == target && i != j) {
@@ -56,7 +60,7 @@ public class TwoSumSortedArray {
                 }
                 j++;
             }
-            j = i + 1;
+            j = i+1;
 
         }
 
@@ -84,6 +88,13 @@ public class TwoSumSortedArray {
         int[] arr = {-1, 0};
         int[] expected = {1, 2};
         int target = -1;
+        Assertions.assertArrayEquals(expected, twoSum(arr, target));
+    }
+    @Test
+    public void test4() {
+        int[] arr = {1,2,3,4,4,9,56,90};
+        int[] expected = {4,5};
+        int target = 8;
         Assertions.assertArrayEquals(expected, twoSum(arr, target));
     }
 }
